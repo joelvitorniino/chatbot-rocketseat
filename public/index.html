@@ -39,8 +39,16 @@
         const renderMessage = (message) => {
             const messages = document.getElementsByClassName('messages')[0];
 
-            messages.innerHTML = `<div class="message"><strong>${message.author}</strong>: ${message.message}</div>`;
+            messages.innerHTML += `<div class="message"><strong>${message.author}</strong>: ${message.message}</div>`;
         };
+
+        socket.on('previousMessages', (messages) => {
+            messages.forEach(message => renderMessage(message));
+        });
+
+        socket.on('receivedMessage', message => {
+            renderMessage(message);
+        });
 
         chat.addEventListener('submit', event => {
             event.preventDefault();
