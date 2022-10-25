@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import ejs from 'ejs';
+import { db } from './db/db';
+import { ChatController } from './controller/ChatController';
 
 const app = express();
 const server = http.createServer(app);
@@ -17,15 +19,30 @@ app.use('/', (request: Request, response: Response) => {
     response.render('index.html');
 });
 
-let messages = [];
-
-io.on('connection', socket => {
+io.on('connection', async socket => {
     console.log(`Socket conectado ${socket.id}`);
 
-    socket.emit('previousMessages', messages);
+    const chatController = new ChatController();
 
-    socket.on('sendMessage', data => {
-        messages.push(data);
+    const chatIndex = await chatController.index();
+    const jsonStringify = JSON.stringify(chatIndex.map(data => data.toJSON()));
+    const jsonParse = JSON.parse(jsonStringify);
+
+    let messages;
+
+    jsonParse.forEach(data => {
+        messages = [
+            {
+                author: data.message_author,
+                message: data.message
+            }
+        ]
+
+        socket.emit("previousMessages", messages);
+    });
+
+    socket.on('sendMessage', async data => {
+        await chatController.store(data);
         socket.broadcast.emit('receivedMessage', data);
     });
 });
