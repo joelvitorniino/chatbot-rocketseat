@@ -9,4 +9,6 @@ export const Chat = db.define('messages', {
     },
     message_author: DataTypes.STRING,
     message: DataTypes.STRING
+}, {
+    timestamps: false,
 });
