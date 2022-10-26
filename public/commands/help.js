@@ -6,6 +6,7 @@ const commandHelp = (message) => {
         message.message = '.wikipedia - Search in the wikipedia.'
 
         setTimeout(() => {
+            socket.emit("sendMessage", message);
             messages.innerHTML += `<div class="message"><strong>${message.author}</strong>: ${message.message}</div>`
         }, 2000);
     };
