@@ -3,7 +3,7 @@ const commandHelp = (message) => {
         const messages = document.getElementsByClassName('messages')[0];
 
         message.author = 'Mr. Robot';
-        message.message = '.wikipedia - Search in the wikipedia.'
+        message.message = '.wikipedia - Search in the wikipedia.\n .fox - Send image random of fox!'
 
         setTimeout(() => {
             socket.emit("sendMessage", message);
