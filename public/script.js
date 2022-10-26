@@ -35,9 +35,7 @@ const renderImage = (message) => {
 };
 
 socket.on("previousMessages", (messages) => {
-  messages.forEach((message) => {
-    renderMessage(message);
-  });
+  messages.forEach((message) => renderMessage(message));
 });
 
 socket.on("receivedMessage", (message) => {
