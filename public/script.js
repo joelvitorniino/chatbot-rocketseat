@@ -58,7 +58,6 @@ chat.addEventListener("submit", (event) => {
 
   setMessageObject(author, message);
   renderMessage(messageObject);
-  renderImage(messageObject);
 
   commands(messageObject);
 });
