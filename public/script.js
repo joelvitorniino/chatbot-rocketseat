@@ -19,11 +19,25 @@ const setMessageObject = (author, message) => {
 const renderMessage = (message) => {
   const messages = document.getElementsByClassName("messages")[0];
 
-  messages.innerHTML += `<div class="message"><strong>${message.author}</strong>: ${message.message}</div>`;
+  if(message.author === 'Mr. Robot' && message.message.startsWith('https://randomfox.ca')) {
+    messages.innerHTML += `<div class="message"><strong>${message.author}</strong>:</div>`;
+    renderImage(message);
+  } else {
+    messages.innerHTML += `<div class="message"><strong>${message.author}</strong>: ${message.message}</div>`;
+  };
+};
+
+const renderImage = (message) => {
+  let image = document.createElement('img');
+  image.src = message.message;
+
+  document.querySelector('.messages').appendChild(image) 
 };
 
 socket.on("previousMessages", (messages) => {
-  messages.forEach((message) => renderMessage(message));
+  messages.forEach((message) => {
+    renderMessage(message);
+  });
 });
 
 socket.on("receivedMessage", (message) => {
@@ -32,6 +46,7 @@ socket.on("receivedMessage", (message) => {
 
 const commands = (message) => {
   commandWikipedia(message);
+  commandFox(message);
   commandHelp(message);
 };
 
@@ -43,6 +58,7 @@ chat.addEventListener("submit", (event) => {
 
   setMessageObject(author, message);
   renderMessage(messageObject);
+  renderImage(messageObject);
 
   commands(messageObject);
 });
