@@ -18,6 +18,7 @@ const commandWikipedia = (message) => {
       .catch((err) => (message.message = `Error: ${err}`));
 
     setTimeout(() => {
+      socket.emit("sendMessage", message);
       messages.innerHTML += `<div class="message"><strong>${message.author}</strong>: ${message.message}</div>`;
     }, 2000);
   }
