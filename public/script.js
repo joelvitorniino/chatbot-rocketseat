@@ -25,6 +25,10 @@ const renderMessage = (message) => {
   } else {
     messages.innerHTML += `<div class="message"><strong>${message.author}</strong>: ${message.message}</div>`;
   };
+
+  if(message.author === 'Mr. Robot' && message.message.startsWith('../media')) {
+    messages.innerHTML += `<div class="message"><strong>${message.author}</strong>: <audio class="audio-faro" src="${message.message}" controls></div>`;
+  };
 };
 
 const renderImage = (message) => {
@@ -45,6 +49,7 @@ socket.on("receivedMessage", (message) => {
 const commands = (message) => {
   commandWikipedia(message);
   commandFox(message);
+  commandFaro(message);
   commandHelp(message);
 };
 
