@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
 import { Chat } from "../model/Chat";
+import { ChatRepository } from "../repository/ChatRepository";
 
 export class ChatController {
-    async index() {
-        const chat = await Chat.findAll();
+    public repository: ChatRepository = new ChatRepository();
 
-        return chat;
+    async index() {
+        return await this.repository.findAll();
     };
 
     async store(messageObject: any) {
         const { author, message } = messageObject;
-
-        await Chat.create({
+        return await this.repository.create({
             message_author: author,
             message
         });
     };
-}
+};
