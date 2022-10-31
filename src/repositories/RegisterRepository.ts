@@ -1,4 +1,4 @@
-import { Register } from "../model/Register";
+import { Register } from "../models/Register";
 
 export class RegisterRepository {
     async create(data: any) {

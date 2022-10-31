@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import ejs from 'ejs';
-import { ChatController } from './controller/ChatController';
+import { ChatController } from './controllers/ChatController';
 
 const app = express();
 const server = http.createServer(app);

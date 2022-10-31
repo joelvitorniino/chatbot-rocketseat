@@ -1,6 +1,4 @@
-import { Request, Response } from "express";
-import { Chat } from "../model/Chat";
-import { ChatRepository } from "../repository/ChatRepository";
+import { ChatRepository } from "../repositories/ChatRepository";
 
 export class ChatController {
     public repository: ChatRepository = new ChatRepository();
