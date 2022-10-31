@@ -21,4 +21,12 @@ export class RegisterController {
 
         return response.json(data);
     };
+
+    async deleteById(request: Request, response: Response) {
+        const { id_chat } = request.params;
+
+        await repository.deleteById(Number(id_chat));
+
+        return response.json({ data: "Deleted!" })
+    }
 };
