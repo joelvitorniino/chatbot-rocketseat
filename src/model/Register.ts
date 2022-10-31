@@ -8,6 +8,7 @@ export const Register = db.define('register', {
         autoIncrement: true
     },
 
+    name_chat: DataTypes.STRING,
     email_chat: DataTypes.STRING,
-    password: DataTypes.STRING
+    password_chat: DataTypes.STRING
 });
