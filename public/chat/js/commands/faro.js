@@ -9,7 +9,7 @@ const commandFaro = (message) => {
 
     // Create array of audios to void repeat code
     for(let i = 1; i <= 6; i++) {
-      audios.push(`../media/faro${i}.mp3`);
+      audios.push(`/media/faro${i}.mp3`);
     };
 
     const randomAudio = random.randomIndex(audios);
@@ -17,7 +17,7 @@ const commandFaro = (message) => {
 
     setTimeout(() => {
       socket.emit("sendMessage", message);
-      messages.innerHTML += `<div class="message"><strong>${message.author}</strong>: <audio src="${message.message}" controls></audio</div>`;
+      messages.innerHTML += `<div class="message"><strong>${message.author}</strong>: <audio src="http://localhost:3000/chat/media/${message.message}" controls></audio</div>`;
     }, 2000);
   };
 };

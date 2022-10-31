@@ -9,6 +9,10 @@ export class RegisterRepository {
         return await Register.destroy({ where: { id_chat } });
     };
 
+    async findOne(data: any) {
+        return await Register.findOne({ where: data });
+    }
+
     async findAll() {
         return await Register.findAll();
     };

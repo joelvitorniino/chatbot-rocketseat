@@ -18,9 +18,20 @@ app.set('views', `${__dirname}/../public`);
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 
-app.get('/', (request: Request, response: Response) => {
-    response.render('index.html');
+app.use(express.static(`${__dirname}/../public/home`));
+app.get('/home', (request: Request, response: Response) => {
+    response.render('/home');
 });
+
+app.use(express.static(`${__dirname}/../public/register`));
+app.get('/register', (request: Request, response: Response) => {
+    response.render('/register');
+});
+
+// app.get('/chat', (request: Request, response: Response) => {
+//     response.render('/chat');
+// });
+
 
 app.use(routes);
 
