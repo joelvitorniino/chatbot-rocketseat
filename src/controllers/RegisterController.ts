@@ -1,18 +1,24 @@
+import { Request, Response } from "express";
 import { RegisterRepository } from "../repositories/RegisterRepository";
 
-export class RegisterController {
-    public repository: RegisterRepository = new RegisterRepository();
+const repository = new RegisterRepository();
 
-    async index() {
-        return await this.repository.findAll();
+export class RegisterController {
+
+    async index(request: Request, response: Response) {
+        const data = await repository.findAll();
+
+        return response.json(data);
     };
 
-    async store(register: any) {
-        const { name, email, password } = register;
-        return await this.repository.create({
+    async store(request: Request, response: Response) {
+        const { name, email, password } = request.body;
+        const data = await repository.create({
             name_chat: name,
             email_chat: email,
             password_chat: password
         });
+
+        return response.json(data);
     };
 };

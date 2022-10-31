@@ -11,4 +11,8 @@ export const Register = db.define('register', {
     name_chat: DataTypes.STRING,
     email_chat: DataTypes.STRING,
     password_chat: DataTypes.STRING
+}, {
+    tableName: 'register',
+    freezeTableName: true,
+    timestamps: false
 });
