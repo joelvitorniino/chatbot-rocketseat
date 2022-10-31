@@ -15,6 +15,4 @@ form.addEventListener('submit', (e) => {
     },
     body: JSON.stringify({ name, email, password })
   });
-
-  console.log(name, email, password)
 });
