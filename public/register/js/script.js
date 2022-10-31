@@ -14,5 +14,7 @@ form.addEventListener('submit', (e) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ name, email, password })
+  }).then(() => {
+    window.location.href = 'http://localhost:3000'
   });
 });

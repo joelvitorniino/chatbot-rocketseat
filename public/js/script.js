@@ -1,10 +1,6 @@
-const form = document.querySelecter('form');
+const form = document.querySelector('form');
 
-// form.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   return false;
-// });
-
-function register() {
-  window.location.href = 'http://localhost:3000/register'
-};
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+});
