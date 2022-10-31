@@ -2,7 +2,6 @@ import express, { Request, Response } from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import ejs from 'ejs';
-import { db } from './db/db';
 import { ChatController } from './controller/ChatController';
 
 const app = express();
