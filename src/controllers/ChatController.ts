@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import { ChatRepository } from "../repositories/ChatRepository";
 
 export class ChatController {
@@ -12,5 +13,9 @@ export class ChatController {
             message_author: author,
             message: message
         });
+    };
+
+    async verifyToken(request: Request, response: Response) {
+        return response.json({ data: "Token is valid!" });
     };
 };

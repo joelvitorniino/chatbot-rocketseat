@@ -19,12 +19,25 @@
 
     <script>
         function loadPage() {
-            if(localStorage.hasOwnProperty('token_secret')) {
-                alert('Access allow!');
-            } else {
-                alert("ACCESS FORBIDDEN!")
-                window.location.href = 'http://localhost:3000/'
-            };
+            const getToken = localStorage.getItem('token_secret');
+
+            fetch('http://localhost:3000/api/v1/token', {
+                method: 'GET',
+                withCredentials: true,
+                credentials: 'include',
+                headers: {
+                    Authorization: `Bearer ${getToken}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                return;
+            })
+            .catch(() => {
+                alert('ACCESS FORBIDDEN!');
+                window.location.href = 'http://localhost:3000'
+            });
         }
     </script>
     <script src="./js/model/Image.js"></script>
