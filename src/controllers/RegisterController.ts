@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { RegisterRepository } from "../repositories/RegisterRepository";
+import bcrypt from 'bcryptjs';
+import { hashPassword } from "../util/hashPassword";
 
 const repository = new RegisterRepository();
 
@@ -10,18 +12,20 @@ export class RegisterController {
     const data = await repository.findAll();
 
     return response.json(data);
-  }
+  };
 
   async store(request: Request, response: Response) {
     const { name, email, password } = request.body;
+    const passwordHash = hashPassword(password);
+
     const data = await repository.create({
       name_chat: name,
       email_chat: email,
-      password_chat: password,
+      password_chat: passwordHash,
     });
 
     return response.json(data);
-  }
+  };
 
   async findOne(request: Request, response: Response) {
     const { email, password } = request.body;
@@ -36,12 +40,6 @@ export class RegisterController {
     } else {
         response.status(403).json({ data: "User not exists!" });  
     };
-
-    return middleware = (request: Request, response: Response, next: NextFunction) => {
-        if(data) {
-            next();
-        };
-    };
   };
 
   async deleteById(request: Request, response: Response) {
@@ -50,9 +48,9 @@ export class RegisterController {
     const data = await repository.deleteById(Number(id_chat));
 
     if(data) {
-        response.json({ data: "Deleted!" });
+      response.json({ data: "Deleted!" });
     } else {
-        response.status(500).json({ data: "Id not exists!" });
+      response.status(500).json({ data: "Id not exists!" });
     };
   };
 };
