@@ -1,3 +1,4 @@
+import { compare } from "bcryptjs";
 import { NextFunction, Request, Response } from "express";
 import { RegisterRepository } from "../repositories/RegisterRepository";
 import { hashPassword } from "../util/hashPassword";
@@ -28,11 +29,15 @@ export class RegisterController {
     const { email, password } = request.body;
 
     const data = await repository.findOne({
-        email_chat: email,
-        password_chat: password,
+        email_chat: email
     });
+
+    const jsonStringify = JSON.stringify(data.toJSON());
+    const jsonParse = JSON.parse(jsonStringify);
+
+    const isValidPassword = await compare(password, jsonParse.password_chat);
     
-    if (data) {
+    if (isValidPassword) {
         response.json({ data: "User exists!" });
     } else {
         response.status(403).json({ data: "User not exists!" });  

@@ -13,11 +13,10 @@ export class RegisterRepository {
         return await Register.destroy({ where: { id_chat } });
     };
 
-    async findOne({ email_chat, password_chat }) {
+    async findOne({ email_chat }) {
         return await Register.findOne({
             where: {
                 email_chat,
-                password_chat
             }
         });
     }

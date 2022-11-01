@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="./styles.css">
 </head>
-<body>
+<body onload="loadPage()">
     <form id="chat">
         <input type="text" name="username" placeholder="Digite seu usuário" />
         <div class="messages"></div>
@@ -17,6 +17,16 @@
         <button type="submit">Enviar</button>
     </form>
 
+    <script>
+        function loadPage() {
+            if(localStorage.hasOwnProperty('token_secret')) {
+                alert('Access allow!');
+            } else {
+                alert("ACCESS FORBIDDEN!")
+                window.location.href = 'http://localhost:3000/'
+            };
+        }
+    </script>
     <script src="./js/model/Image.js"></script>
     <script src="./js/model/Random.js"></script>
     <script src="./js/script.js"></script>

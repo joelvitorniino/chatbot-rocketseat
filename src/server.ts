@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import ejs from "ejs";
 import { ChatController } from "./controllers/ChatController";
 import routes from "./routes";
+import authMiddleware from "./middleware/authMiddleware";
 
 const app = express();
 const server = http.createServer(app);

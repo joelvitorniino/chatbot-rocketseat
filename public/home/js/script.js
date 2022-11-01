@@ -6,7 +6,7 @@ form.addEventListener('submit', (e) => {
   const email = document.getElementsByName('email')[0].value;
   const password = document.getElementsByName('password')[0].value;
 
-  fetch('http://localhost:3000/api/v1/login', {
+  fetch('http://localhost:3000/api/v1/auth', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -16,10 +16,11 @@ form.addEventListener('submit', (e) => {
   })
     .then(response => response.json())
     .then(data => {
-      if(data.data === 'User exists!') {
-        window.location.href = 'http://localhost:3000/chat?auth=true'
-      } else {
-        alert('Error! User not exists!');
-      }
+      localStorage.setItem("token_secret", data.token);
+      window.location.href = 'http://localhost:3000/chat';
+    })
+    .catch(() => {
+      alert("Email or Password invalid!");
+      window.location.href = 'http://localhost:3000'
     });
 });
