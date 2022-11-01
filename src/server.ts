@@ -26,15 +26,15 @@ app.engine("html", ejs.renderFile);
 app.set("view engine", "html");
 
 app.get("/", (request: Request, response: Response) => {
-  response.render("home.html");
+    response.render("home.html");
 });
 
 app.get("/register", (request: Request, response: Response) => {
-  response.render("register.html");
+    response.render("register.html");
 });
 
 app.get("/chat", (request: Request, response: Response) => {
-  response.render("chat.html");
+    response.render("chat.html");
 });
 
 app.use(routes);
@@ -67,4 +67,4 @@ io.on("connection", async (socket) => {
   });
 });
 
-server.listen(3003);
+server.listen(3000);
