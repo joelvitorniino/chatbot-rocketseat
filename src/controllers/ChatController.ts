@@ -7,10 +7,10 @@ export class ChatController {
         return await this.repository.findAll();
     };
 
-    async store(messageObject: { author: string, message: string }) {
+    async store({ author, message }) {
         return await this.repository.create({
-            message_author: messageObject.author,
-            message: messageObject.message
+            message_author: author,
+            message: message
         });
     };
 };

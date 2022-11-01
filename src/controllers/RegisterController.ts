@@ -1,11 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { RegisterRepository } from "../repositories/RegisterRepository";
-import bcrypt from 'bcryptjs';
 import { hashPassword } from "../util/hashPassword";
 
 const repository = new RegisterRepository();
-
-let middleware = null;
 
 export class RegisterController {
   async index(request: Request, response: Response) {
@@ -54,5 +51,3 @@ export class RegisterController {
     };
   };
 };
-
-export default middleware;
