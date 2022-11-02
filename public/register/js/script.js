@@ -14,6 +14,15 @@ form.addEventListener('submit', (e) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ name, email, password })
+  });
+  
+  fetch('http://localhost:3000/api/v1/email', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, email, password })
   }).then(() => {
     window.location.href = 'http://localhost:3000'
   });
