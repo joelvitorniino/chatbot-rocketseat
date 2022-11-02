@@ -7,19 +7,19 @@ config();
 class EmailService {
     createTransporter(service: string, { user, pass }, secure: boolean): Transporter {
         return nodemailer.createTransport({
-            service,
+            service: service,
             auth: {
-                user,
-                pass
+                user: user,
+                pass: pass
             },
-            secure
+            secure: secure
         });
     };
 
     async sendMail(sender: ISender, receiver: IReceiver, mailContent: IMailContent) {
         const transporter = this.createTransporter('Gmail', {
             user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_PASSWORD
+            pass: process.env.GMAIL_PASS
         }, true);
 
         await transporter.sendMail({
