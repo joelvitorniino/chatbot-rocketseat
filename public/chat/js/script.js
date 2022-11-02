@@ -18,6 +18,7 @@ const setMessageObject = (author, message) => {
 
 const renderImage = new InsertImage();
 
+try {
 const renderMessage = (message) => {
   const messages = document.getElementsByClassName("messages")[0];
 
@@ -57,3 +58,6 @@ chat.addEventListener("submit", (event) => {
 
   commands(messageObject);
 });
+} catch(e) {
+  return e;
+}
