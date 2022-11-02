@@ -1,6 +1,7 @@
 import { compare } from "bcryptjs";
 import { NextFunction, Request, Response } from "express";
 import { RegisterRepository } from "../repositories/RegisterRepository";
+import EmailService from "../service/email/EmailService";
 import { hashPassword } from "../util/hashPassword";
 
 const repository = new RegisterRepository();
@@ -54,5 +55,21 @@ export class RegisterController {
     } else {
       response.status(500).json({ data: "Id not exists!" });
     };
+  };
+
+  async sendEmail(request: Request, response: Response) {
+    const { name, email } = request.body;
+
+    await EmailService.sendMail({
+      name: '[Chat Bot Rocketseat]',
+    }, {
+      email
+    }, {
+      subject: 'Welcome!',
+      text: `Hello ${name}. Welcome to Chat Bot Rocketseat! I hope you have fun! Thanks for the registration on chat.`,
+      html: `<strong>Hello ${name}. Welcome to Chat Bot Rocketseat! I hope you have fun! Thanks for the registration on chat.</strong>`
+    });
+
+    return response.json({ email: "Email sended!" });
   };
 };
