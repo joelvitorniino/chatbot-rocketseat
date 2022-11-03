@@ -59,5 +59,5 @@ chat.addEventListener("submit", (event) => {
   commands(messageObject);
 });
 } catch(e) {
-  return e;
+  console.log(e);
 }

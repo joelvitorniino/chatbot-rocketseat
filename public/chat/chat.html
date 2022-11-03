@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Modificado</title>
     <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
-    
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body onload="loadPage()">
@@ -36,15 +35,14 @@
             })
             .catch(() => {
                 document.querySelector('form').remove();
-
                 const div = document.createElement('div');
-                div.innerHTML = `<strong>Access Forbidden! Token is invalid. Please register or sign in.</strong>`;
                 
-                const divSignIn = document.createElement('div');
-                divSignIn.innerHTML = `<a href="http://localhost:3000/">Click to Sign in.</a>`;
-
+                div.innerHTML = `<strong>Your token is invalid, you to be redirectioned to page of login!</strong>`;
                 document.body.appendChild(div);
-                document.body.appendChild(divSignIn);
+
+                setTimeout(() => {
+                    window.location.href = "http://localhost:3000/"
+                }, 6000);
             });
         }
     </script>
