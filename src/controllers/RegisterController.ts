@@ -20,7 +20,7 @@ export class RegisterController {
     const data = await repository.create({
       name_chat: name,
       email_chat: email,
-      password_chat: passwordHash,
+      password_chat: passwordHash
     });
 
     return response.json(data);

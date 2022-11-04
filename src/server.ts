@@ -17,8 +17,10 @@ const makeDirName = (path: string) => `${__dirname}/${path}`;
 
 const views = [
   makeDirName(`../public/home`),
+  makeDirName('../public/forgot'),
+  makeDirName('../public/reset_password'),
   makeDirName(`../public/register`),
-  makeDirName(`../public/chat`),
+  makeDirName(`../public/chat`)
 ];
 
 app.set("views", views);
@@ -28,6 +30,14 @@ app.set("view engine", "html");
 
 app.get("/", (request: Request, response: Response) => {
     response.render("home.html");
+});
+
+app.get("/forgot", (request: Request, response: Response) => {
+  response.render("forgot.html");
+});
+
+app.get("/reset_password", (request: Request, response: Response) => {
+  response.render("reset_password.html");
 });
 
 app.get("/register", (request: Request, response: Response) => {

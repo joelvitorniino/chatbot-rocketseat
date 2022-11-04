@@ -14,6 +14,8 @@ router.post('/api/v1/register', registerController.store);
 router.post('/api/v1/email', registerController.sendEmail);
 router.post('/api/v1/auth', authController.authenticate);
 router.get('/api/v1/token', authMiddleware, chatController.verifyToken);
+router.post('/api/v1/forgot_password', authController.forgotPassword);
+router.post('/api/v1/reset_password', authController.resetPassword);
 router.delete('/api/v1/register/:id_chat', registerController.deleteById);
 
 export default router;

@@ -1,6 +1,7 @@
 import { IMailContent, IReceiver, ISender } from "../interface";
 import nodemailer, { Transporter } from 'nodemailer';
 import { config } from "dotenv";
+import hbs from "nodemailer-express-handlebars";
 
 config();
 
@@ -16,7 +17,7 @@ class EmailService {
         });
     };
 
-    async sendMail(sender: ISender, receiver: IReceiver, mailContent: IMailContent) {
+    async sendMail(sender: ISender, receiver: IReceiver, mailContent: IMailContent): Promise<void> {
         const transporter = this.createTransporter('Gmail', {
             user: process.env.GMAIL_USER,
             pass: process.env.GMAIL_PASS
@@ -29,6 +30,25 @@ class EmailService {
             text: mailContent.text,
             html: mailContent.html
         });
+    };
+
+    async forgotPassword() {
+        const transporter = this.createTransporter('Gmail', {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASS
+        }, true);
+
+        const handlebarOptions = {
+            viewEngine: {
+                extName: '.html',
+                partialsDir: `${__dirname}/../resources/mail`,
+                layoutsDir: `${__dirname}/../resources/mail`
+            },
+            viewPath: `${__dirname}/../resources/mail`,
+            extName: '.html'
+        }
+
+        transporter.use('compile', hbs(handlebarOptions));
     };
 };
 

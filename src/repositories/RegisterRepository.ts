@@ -24,4 +24,10 @@ export class RegisterRepository {
     async findAll() {
         return await Register.findAll();
     };
+
+    async findByIdAndUpdate(id_chat: number, { password_chat_resetToken, password_chat_resetExpires }) {
+        return await Register.update({ password_chat_resetToken, password_chat_resetExpires }, {
+            where: { id_chat }
+        });
+    }
 };
