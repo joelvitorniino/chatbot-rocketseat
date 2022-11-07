@@ -16,6 +16,6 @@ export class ChatController {
     };
 
     async verifyToken(request: Request, response: Response) {
-        return response.json({ data: "Token is valid!" });
+        return response.json();
     };
 };
