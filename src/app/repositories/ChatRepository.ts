@@ -6,7 +6,10 @@ export class ChatRepository {
         return await Chat.findAll();
     };
 
-    async create(data: any) {
-        return await Chat.create(data);
+    async create({ message_author, message }) {
+        return await Chat.create({
+            message_author, 
+            message
+        });
     };
 }

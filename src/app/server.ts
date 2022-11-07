@@ -72,9 +72,9 @@ io.on("connection", async (socket) => {
     socket.emit("previousMessages", messages);
   });
 
-  socket.on("sendMessage", async (data) => {
-    await chatController.store(data);
-    socket.broadcast.emit("receivedMessage", data);
+  socket.on("sendMessage", async ({ author, message }) => {
+    await chatController.store({ author, message });
+    socket.broadcast.emit("receivedMessage", { author, message });
   });
 });
 
