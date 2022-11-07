@@ -14,9 +14,14 @@ form.addEventListener('submit', (e) => {
         body: JSON.stringify({ email })
   })
     .then(() => {
-        alert("Verify your email!")
+        const div = document.createElement('div');
 
-        window.location.href = 'http://localhost:3000/reset_password'
+        div.innerHTML = `<br><br><strong>Verify your email!</strong>`
+        document.querySelector('.forgot-form').appendChild(div);
+
+        setTimeout(() => {
+            window.location.href = 'http://localhost:3000/reset_password'
+        }, 5000);
     })
     .catch(() => alert("Error! Email invalid"));
 });
