@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import { sign } from "jsonwebtoken";
 import { RegisterRepository } from "../repositories/RegisterRepository";
 import crypto from 'crypto';
-import EmailService from "../service/email/EmailService";
+import EmailService from "../services/email/EmailService";
 import { readFileSync } from 'fs';
 import handlebars from 'handlebars';
 import { hashPassword } from "../util/hashPassword";

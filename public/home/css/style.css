@@ -76,6 +76,25 @@ body {
   display: inline-block;
   margin-top: 20px;
 }
+
+.login-form a.link {
+  text-decoration: none;
+  color: #747474;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.login-form a.link-google {
+  text-decoration: none;
+  color: #747474;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 20px;
+}
+
 .login-form .action {
   display: -webkit-box;
   display: flex;

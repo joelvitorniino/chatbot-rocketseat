@@ -1,7 +1,7 @@
 import { compare } from "bcryptjs";
 import { NextFunction, Request, Response } from "express";
 import { RegisterRepository } from "../repositories/RegisterRepository";
-import EmailService from "../service/email/EmailService";
+import EmailService from "../services/email/EmailService";
 import { hashPassword } from "../util/hashPassword";
 
 const repository = new RegisterRepository();
