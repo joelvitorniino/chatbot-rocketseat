@@ -11,11 +11,24 @@ export class GoogleService {
         const { name, email } = profile;
         const { givenName, familyName } = name;
 
-        await repository.create({
-            name_chat: `${givenName} ${familyName}`,
-            email_chat: email,
-            password_chat: ''
-        });
+        const chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const passwordLength = 12;
+        let password = "";
+
+        for (let i = 0; i <= passwordLength; i++) {
+            let randomNumber = Math.floor(Math.random() * chars.length);
+            password += chars.substring(randomNumber, randomNumber +1);
+        }
+
+        const user = await repository.findOne({ email_chat: email });
+
+        if(!user) {
+            await repository.create({
+                name_chat: `${givenName} ${familyName}`,
+                email_chat: email,
+                password_chat: password
+            });
+        };
 
         return done(null, profile);
     };
