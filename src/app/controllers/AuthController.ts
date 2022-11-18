@@ -13,6 +13,10 @@ config();
 
 const repository = new RegisterRepository();
 
+interface User {
+    email: string;
+}
+
 export class AuthController {
     async authenticate(request: Request, response: Response) {
         const { email, password } = request.body;
@@ -122,5 +126,21 @@ export class AuthController {
         } catch(err) {
             response.status(400).send({ error: 'Cannot reset password, try again' });
         }
-    }
+    };
+
+    async authenticateGoogle(request: Request, response: Response) {
+        const user: User = request.user as User;
+
+        const userRepository = await repository.findOne({ email_chat: user.email });
+        const userJSON = userRepository.toJSON();
+
+        const jsonStringify = JSON.stringify(userJSON);
+        const jsonParse = JSON.parse(jsonStringify); 
+
+        const token = sign({ id: jsonParse.id_chat }, process.env.TOKEN, { expiresIn: '1d' });
+
+        return response.json({
+            token
+        });
+    };
 };
