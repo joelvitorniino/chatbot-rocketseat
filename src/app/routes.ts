@@ -32,6 +32,6 @@ router.get('/google/callback', passport.authenticate('google', {
     failureRedirect: '/auth/failure',
 }));
 
-router.get('/api/v1/email/login', authController.sendWarning);
+router.post('/api/v1/email/login', authController.sendWarning);
 
 export default router;

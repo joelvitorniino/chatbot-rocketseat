@@ -1,12 +1,12 @@
 const form = document.querySelector('form');
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
   
   const email = document.getElementsByName('email')[0].value;
   const password = document.getElementsByName('password')[0].value;
 
-  fetch('http://localhost:3000/api/v1/auth', {
+  await fetch('http://localhost:3000/api/v1/auth', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -23,4 +23,13 @@ form.addEventListener('submit', (e) => {
       alert("Email or Password invalid!");
       window.location.href = 'http://localhost:3000'
     });
+
+    fetch('http://localhost:3000/api/v1/email/login', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email })
+    })
 });
