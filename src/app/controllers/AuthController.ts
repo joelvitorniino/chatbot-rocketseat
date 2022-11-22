@@ -143,4 +143,29 @@ export class AuthController {
             token
         });
     };
+
+    async sendWarning(request: Request, response: Response) {
+        const { email } = request.body;
+        const userRepository = await repository.findOne({ email_chat: email });
+        const userJSON = userRepository.toJSON();
+
+        const jsonStringify = JSON.stringify(userJSON);
+        const jsonParse = JSON.parse(jsonStringify); 
+        
+        EmailService.sendMail({
+            name: 'Warning of login'
+        }, {
+            email,
+        }, {
+            html: null,
+            text: `Hello ${jsonParse.name_chat}! We are sending this email to inform your login on chat.`,
+            subject: 'Warning of login'
+        })
+        .catch(err => {
+            if(err) {
+                return response.status(400).send({ error: 'Cannot send warning!' });
+            }
+        })
+        .then(() => response.send());
+    }
 };
