@@ -50,7 +50,7 @@ const commands = (message) => {
 chat.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const author = document.getElementsByName("username")[0].value;
+  const author = localStorage.getItem('name_chat');
   const message = document.getElementsByName("message")[0].value;
 
   setMessageObject(author, message);
