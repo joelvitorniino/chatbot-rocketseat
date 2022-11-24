@@ -167,5 +167,16 @@ export class AuthController {
             }
         })
         .then(() => response.send());
-    }
+    };
+    
+    async findNameByEmail(request: Request, response: Response) {
+        const { email } = request.body;
+        const userRepository = await repository.findOne({ email_chat: email });
+        const userJSON = userRepository.toJSON();
+
+        const jsonStringify = JSON.stringify(userJSON);
+        const jsonParse = JSON.parse(jsonStringify); 
+
+        return response.json({ name: jsonParse.name_chat });
+    };
 };
