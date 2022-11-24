@@ -31,5 +31,18 @@ form.addEventListener('submit', async (e) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ email })
+    });
+
+    fetch('http://localhost:3000/api/v1/find_name', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email })
     })
+      .then(response => response.json())
+      .then(data => {
+        localStorage.setItem('name', data.name);
+      });
 });

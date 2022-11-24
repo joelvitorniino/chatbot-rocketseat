@@ -179,4 +179,15 @@ export class AuthController {
 
         return response.json({ name: jsonParse.name_chat });
     };
+
+    async findNameByEmailGoogleAuth(request: Request, response: Response) {
+        const { email } = request.user as User;
+        const userRepository = await repository.findOne({ email_chat: email });
+        const userJSON = userRepository.toJSON();
+
+        const jsonStringify = JSON.stringify(userJSON);
+        const jsonParse = JSON.parse(jsonStringify); 
+
+        return response.json({ name: jsonParse.name_chat });
+    };
 };
