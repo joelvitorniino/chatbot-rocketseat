@@ -35,4 +35,6 @@ router.get('/google/callback', passport.authenticate('google', {
 router.post('/api/v1/email/login', authController.sendWarning);
 router.post('/api/v1/find_name', authController.findNameByEmail);
 
+router.post('/api/v1/find_name_google', authController.findNameByEmailGoogleAuth);
+
 export default router;

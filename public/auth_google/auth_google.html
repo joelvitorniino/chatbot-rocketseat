@@ -8,6 +8,18 @@
 </head>
 <body>
     <script>
+        fetch('http://localhost:3000/api/v1/find_name_google', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            localStorage.setItem('name_chat', String(data.name));
+          });
+
         fetch('http://localhost:3000/api/v1/auth_google', {
             method: 'POST',
             headers: {

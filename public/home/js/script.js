@@ -6,6 +6,19 @@ form.addEventListener('submit', async (e) => {
   const email = document.getElementsByName('email')[0].value;
   const password = document.getElementsByName('password')[0].value;
 
+  await fetch('http://localhost:3000/api/v1/find_name', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email })
+    })
+      .then(response => response.json())
+      .then(data => {
+        localStorage.setItem('name_chat', String(data.name));
+      });
+
   await fetch('http://localhost:3000/api/v1/auth', {
     method: 'POST',
     headers: {
@@ -24,7 +37,7 @@ form.addEventListener('submit', async (e) => {
       window.location.href = 'http://localhost:3000'
     });
 
-    fetch('http://localhost:3000/api/v1/email/login', {
+    await fetch('http://localhost:3000/api/v1/email/login', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -32,17 +45,4 @@ form.addEventListener('submit', async (e) => {
       },
       body: JSON.stringify({ email })
     });
-
-    fetch('http://localhost:3000/api/v1/find_name', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email })
-    })
-      .then(response => response.json())
-      .then(data => {
-        localStorage.setItem('name', data.name);
-      });
 });

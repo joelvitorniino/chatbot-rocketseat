@@ -181,8 +181,8 @@ export class AuthController {
     };
 
     async findNameByEmailGoogleAuth(request: Request, response: Response) {
-        const { email } = request.user as User;
-        const userRepository = await repository.findOne({ email_chat: email });
+        const user: User = request.user as User;
+        const userRepository = await repository.findOne({ email_chat: user.email });
         const userJSON = userRepository.toJSON();
 
         const jsonStringify = JSON.stringify(userJSON);
