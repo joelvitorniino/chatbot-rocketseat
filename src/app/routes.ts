@@ -36,5 +36,6 @@ router.post('/api/v1/email/login', authController.sendWarning);
 router.post('/api/v1/find_name', authController.findNameByEmail);
 
 router.post('/api/v1/find_name_google', authController.findNameByEmailGoogleAuth);
+router.post('/api/v1/verify_author', chatController.verifyAuthor);
 
 export default router;
