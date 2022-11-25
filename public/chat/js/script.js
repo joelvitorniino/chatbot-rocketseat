@@ -53,10 +53,24 @@ chat.addEventListener("submit", (event) => {
   const author = localStorage.getItem('name_chat');
   const message = document.getElementsByName("message")[0].value;
 
-  setMessageObject(author, message);
-  renderMessage(messageObject);
+  fetch('http://localhost:3000/api/v1/verify_author', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ author })
+  })
+    .then(response => {
+      if(response.status === 404) {
+        window.location.href = 'http://localhost:3000/'
+      };
 
-  commands(messageObject);
+      setMessageObject(author, message);
+      renderMessage(messageObject);
+
+      commands(messageObject);
+    })
 });
 } catch(e) {
   console.log(e);
