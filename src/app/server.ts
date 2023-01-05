@@ -4,7 +4,6 @@ import { Server } from "socket.io";
 import ejs from "ejs";
 import { ChatController } from "./controllers/ChatController";
 import routes from "./routes";
-import authMiddleware from "./middleware/authMiddleware";
 import { GoogleService } from "./services/google/GoogleService";
 import session from "express-session";
 import { config } from "dotenv";
@@ -98,4 +97,4 @@ io.on("connection", async (socket) => {
   });
 });
 
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
